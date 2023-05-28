@@ -1,0 +1,43 @@
+
+body {
+    margin: 100;
+    align-items: center;
+    background-color:darkolivegreen;
+    color:seashell;
+
+
+}
+
+h1 {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 40px;
+    font-weight: bolder;
+    font-style: italic; 
+    margin-left: 25px;
+    text-align: center;
+
+}
+
+.button {
+    background-color:seashell;
+    font-size: large;
+    padding: 10px 24px;
+    margin-left: 15px;
+    border: 2px solid black;
+}
+
+.button:hover {
+    background-color:#2C3718;
+    color:seashell;
+}
+
+.buttons {
+    text-align: center;
+}
+
+
+.start {
+    margin-top: 50px;
+    text-align: center;
+}
+
