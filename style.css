@@ -24,6 +24,7 @@ h1 {
     padding: 10px 24px;
     margin-left: 15px;
     border: 2px solid black;
+    border-radius:20px;
 }
 
 .button:hover {
@@ -35,9 +36,21 @@ h1 {
     text-align: center;
 }
 
+h2 {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 60px;
+    font-weight: bolder;
+    font-style: italic; 
+    margin-left: 25px;
+    text-align: center;
+
+}
+
 
 .start {
     margin-top: 50px;
     text-align: center;
 }
+
+
 
