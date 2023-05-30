@@ -6,23 +6,23 @@
     <link href="style.css" rel="stylesheet" type="text/css"> 
 </head>
 <body>
-    <div class="container">
-        
-        <h1>pomodoro timer</h1>
-        
-        <div class="buttons">
-            <button id="pomodoroButton" class="button">pomodoro</button>
-            <button id="shortBreakButton" class="button">short break</button>
-            <button id="longBreakButton" class="button">long break</button> 
-        </div>
-
-        <div class="time">
-            <h2 id="timer">25:00</h2>
-        </div>
-
-        <div class="start">
-            <button id="startButton" class="button">start</button>
-        </div>
+    <h1>pomodoro timer</h1>
+    
+    <div class="buttons" id="buttonsForModes">
+        <button id="pomodoroButton" class="button">pomodoro</button>
+        <button id="shortBreakButton" class="button">short break</button>
+        <button id="longBreakButton" class="button">long break</button>
+    </div>
+    
+    <div class="time">
+        <!-- <h2 id="timer">25:00</h2> -->
+        <span id="timerMinutes">00</span>
+        <span id="timerColon">:</span>
+        <span id="timerSeconds">00</span>
+    </div>
+    
+    <div class="start">
+        <button id="startButton" class="button">start</button>
     </div>
 
 </body>
