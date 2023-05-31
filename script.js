@@ -1,12 +1,13 @@
 const buttonList = ["pomodoroButton", "shortBreakButton", "longBreakButton", "startButton"];
-
+const catList = ["catPic1", "catPic2", "catPic3", "catPic4"];
+const clickSound = new Audio("button_click.mp3");
 let numSessions = 0;
-let timeRemainingMins = 0;
-let timeRemainingSecs = 0;
 let totalSecs = 0;
 var interval = null;
 var countingDown = false;
 var pomodoroMode = false;
+var longBreakMode = false;
+
 
 for (let i = 0; i < buttonList.length; i++) {
     document.getElementById(buttonList[i]).addEventListener("click", buttonPressHandler);
@@ -14,6 +15,7 @@ for (let i = 0; i < buttonList.length; i++) {
 
 // if pomodoro button is pressed, set timer to 25:00 
 function buttonPressHandler() {
+    clickSound.play(); 
     let buttonPressed = this.id;
     updateTimer(buttonPressed);
 }
@@ -35,13 +37,16 @@ function updateTimer( mode ) {
     }
 }
 
-function changeBackgroundColor( color ) { document.body.style.background = color; }
+function changeBackgroundColor( color ) { 
+    document.body.style.background = color; 
+    // document.querySelector(".button:hover").style.backgroundColor = "blue"; 
+}
 
 function setPomodoro() {
     // changing html of timer
     document.getElementById("startButton").innerHTML = "start";
     pomodoroMode = true;
-    let minutes = .2; 
+    let minutes = .1; 
     document.getElementById("timerMinutes").innerHTML = `${minutes}`;
     document.getElementById("timerSeconds").innerHTML = "00";
     totalSecs = minutes * 60;
@@ -50,8 +55,9 @@ function setPomodoro() {
 
 function setShortBreak() {
     document.getElementById("startButton").innerHTML = "start";
-    pomodoroMode = false;
-    let minutes = .3;
+    
+    pomodoroMode = false; longBreakMode = false;
+    let minutes = .1;
     document.getElementById("timerMinutes").innerHTML = `${minutes}`;
     document.getElementById("timerSeconds").innerHTML = "00";
     totalSecs = minutes * 60;
@@ -60,8 +66,8 @@ function setShortBreak() {
 
 function setLongBreak() {
     document.getElementById("startButton").innerHTML = "start";
-    pomodoroMode = false;
-    let minutes = 15;
+    pomodoroMode = false; longBreakMode = true;
+    let minutes = .1;
     document.getElementById("timerMinutes").innerHTML = `${minutes}`;
     document.getElementById("timerSeconds").innerHTML = "00";
     totalSecs = minutes * 60;
@@ -72,24 +78,43 @@ function setLongBreak() {
 // setInterval: https://www.w3schools.com/jsref/met_win_setinterval.asp 
 function startCountdown() {
     countingDown = true;
-    if (pomodoroMode) {
-        numSessions++;
-        document.getElementById("catPic" + String(numSessions)).style.visibility = "visible";
-    }
-    if (totalSecs === 0) { return; }
+    if (pomodoroMode) {numSessions++;}
+    if (totalSecs <= 0) {return;}
+
     interval = setInterval( function() {
         totalSecs--;
         let minutes = Math.floor(totalSecs / 60);
         let seconds = totalSecs % 60;
         document.getElementById("timerMinutes").innerHTML = String(minutes).padStart(2, "0");
         document.getElementById("timerSeconds").innerHTML = String(seconds).padStart(2, "0");
+        let pomoText = "pomodoro", breakText = "break"; 
+        if (pomodoroMode) {
+            document.title = `${minutes}:${seconds} -- ${pomoText}`;
+        }
+        else{document.title = `${minutes}:${seconds} -- ${breakText}`;}
+        document.title = `${minutes}:${seconds}`;
         
         // automatically go to next mode
         if (totalSecs === 0) {
             clearInterval(interval); 
-            if (pomodoroMode && numSessions === 4) { setLongBreak();}
-            else if (pomodoroMode) {setShortBreak();}
-            else {setPomodoro();}
+            if (pomodoroMode && numSessions === 4) {
+                setLongBreak(); 
+                document.getElementById("catPic" + String(numSessions)).style.visibility = "visible";
+            }
+            else if (pomodoroMode) {
+                setShortBreak();
+                document.getElementById("catPic" + String(numSessions)).style.visibility = "visible";
+            }
+            else if (longBreakMode) {
+                catList.forEach(element => {
+                    document.getElementById(element).style.visibility = "hidden";
+                });
+
+            }
+            else {
+                setPomodoro();
+                document.getElementById("catPic" + String(numSessions)).style.visibility = "visible";
+            }
         }
     }
     ,1000);
@@ -104,6 +129,18 @@ function startOrStop() {
     else {
         document.getElementById("startButton").innerHTML = "pause"
         startCountdown();
+    }
+}
+
+function notification() {
+    if (!("Notification" in window)) {
+        alert("Browser doesn't support desktop notifications!");
+    }
+    else if (Notification.permission === "granted") {
+        const notification = new Notification("Time is up!");
+    }
+    else if (Notification.permission !== "denied") {
+        
     }
 }
 
