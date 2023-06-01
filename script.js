@@ -1,6 +1,7 @@
 const buttonList = ["pomodoroButton", "shortBreakButton", "longBreakButton", "startButton"];
 const catList = ["catPic1", "catPic2", "catPic3", "catPic4"];
 const clickSound = new Audio("button_click.mp3");
+const chimeSound = new Audio("chime.mp3");
 let numSessions = 0;
 let totalSecs = 0;
 var interval = null;
@@ -96,6 +97,7 @@ function startCountdown() {
         
         // automatically go to next mode
         if (totalSecs <= 0) {
+            chimeSound.play(); 
             clearInterval(interval); 
             if (pomodoroMode && numSessions === 4) {
                 setLongBreak(); 
