@@ -46,7 +46,7 @@ function setPomodoro() {
     // changing html of timer
     document.getElementById("startButton").innerHTML = "start";
     pomodoroMode = true;
-    let minutes = 25; 
+    let minutes = .1; 
     document.getElementById("timerMinutes").innerHTML = `${minutes}`;
     document.getElementById("timerSeconds").innerHTML = "00";
     totalSecs = minutes * 60;
@@ -57,7 +57,7 @@ function setShortBreak() {
     document.getElementById("startButton").innerHTML = "start";
     
     pomodoroMode = false; longBreakMode = false;
-    let minutes = 5;
+    let minutes = .1;
     document.getElementById("timerMinutes").innerHTML = `${minutes}`;
     document.getElementById("timerSeconds").innerHTML = "00";
     totalSecs = minutes * 60;
@@ -67,7 +67,7 @@ function setShortBreak() {
 function setLongBreak() {
     document.getElementById("startButton").innerHTML = "start";
     pomodoroMode = false; longBreakMode = true;
-    let minutes = 15;
+    let minutes = .1;
     document.getElementById("timerMinutes").innerHTML = `${minutes}`;
     document.getElementById("timerSeconds").innerHTML = "00";
     totalSecs = minutes * 60;
@@ -106,6 +106,8 @@ function startCountdown() {
                 document.getElementById("catPic" + String(numSessions)).style.visibility = "visible";
             }
             else if (longBreakMode) {
+                setPomodoro();
+                numSessions = 0;
                 catList.forEach(element => {
                     document.getElementById(element).style.visibility = "hidden";
                 });
