@@ -47,7 +47,7 @@ function setPomodoro() {
     // changing html of timer
     document.getElementById("startButton").innerHTML = "start";
     pomodoroMode = true;
-    let minutes = .1; 
+    let minutes = 25; 
     document.getElementById("timerMinutes").innerHTML = `${minutes}`;
     document.getElementById("timerSeconds").innerHTML = "00";
     totalSecs = minutes * 60;
@@ -58,7 +58,7 @@ function setShortBreak() {
     document.getElementById("startButton").innerHTML = "start";
     
     pomodoroMode = false; longBreakMode = false;
-    let minutes = .1;
+    let minutes = 5;
     document.getElementById("timerMinutes").innerHTML = `${minutes}`;
     document.getElementById("timerSeconds").innerHTML = "00";
     totalSecs = minutes * 60;
@@ -68,7 +68,7 @@ function setShortBreak() {
 function setLongBreak() {
     document.getElementById("startButton").innerHTML = "start";
     pomodoroMode = false; longBreakMode = true;
-    let minutes = .1;
+    let minutes = 15;
     document.getElementById("timerMinutes").innerHTML = `${minutes}`;
     document.getElementById("timerSeconds").innerHTML = "00";
     totalSecs = minutes * 60;
