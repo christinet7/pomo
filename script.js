@@ -46,7 +46,7 @@ function setPomodoro() {
     // changing html of timer
     document.getElementById("startButton").innerHTML = "start";
     pomodoroMode = true;
-    let minutes = .1; 
+    let minutes = 25; 
     document.getElementById("timerMinutes").innerHTML = `${minutes}`;
     document.getElementById("timerSeconds").innerHTML = "00";
     totalSecs = minutes * 60;
@@ -57,7 +57,7 @@ function setShortBreak() {
     document.getElementById("startButton").innerHTML = "start";
     
     pomodoroMode = false; longBreakMode = false;
-    let minutes = .1;
+    let minutes = 5;
     document.getElementById("timerMinutes").innerHTML = `${minutes}`;
     document.getElementById("timerSeconds").innerHTML = "00";
     totalSecs = minutes * 60;
@@ -67,7 +67,7 @@ function setShortBreak() {
 function setLongBreak() {
     document.getElementById("startButton").innerHTML = "start";
     pomodoroMode = false; longBreakMode = true;
-    let minutes = .1;
+    let minutes = 15;
     document.getElementById("timerMinutes").innerHTML = `${minutes}`;
     document.getElementById("timerSeconds").innerHTML = "00";
     totalSecs = minutes * 60;
@@ -95,7 +95,7 @@ function startCountdown() {
         document.title = `${minutes}:${seconds}`;
         
         // automatically go to next mode
-        if (totalSecs === 0) {
+        if (totalSecs <= 0) {
             clearInterval(interval); 
             if (pomodoroMode && numSessions === 4) {
                 setLongBreak(); 
@@ -132,18 +132,24 @@ function startOrStop() {
     }
 }
 
-function notification() {
-    if (!("Notification" in window)) {
-        alert("Browser doesn't support desktop notifications!");
-    }
-    else if (Notification.permission === "granted") {
-        const notification = new Notification("Time is up!");
-    }
-    else if (Notification.permission !== "denied") {
-        
-    }
-}
-
+// document.addEventListener("DOMContentLoaded", () => {
+//     if (!("Notification" in window)) {
+//         alert("Browser doesn't support desktop notifications!");
+//     }
+//     else {
+//         if (Notification.permission === "granted" && totalSecs <= 0) {
+//         // const notification = new Notification("Time is up!");
+//         alert("time is up");
+//         }
+//         else if (Notification.permission !== "denied") {
+//             Notification.requestPermission().then(function (permission) {
+//                 if (permission === "granted") {
+//                     new Notification("You will be notified at the end of each session!");
+//                 }
+//             });
+//         }
+//     }
+// });
 
 
 
